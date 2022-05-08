@@ -10,6 +10,8 @@ import App from 'components/App';
 
 import config from './config';
 
+import 'antd/dist/antd.css';
+
 const renderComponent = rootElement => {
   rootElement.render(
     <PersistGate persistor={persistor}>
