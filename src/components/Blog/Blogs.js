@@ -1,12 +1,14 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Affix, Button } from 'antd';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import BlogModal from './BlogModal';
 
 const Blogs = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isUserLoggedIn = useSelector(store => store.data.auth.isLoggedIn);
 
   const handleSave = values => {
     console.log(values);
@@ -23,15 +25,17 @@ const Blogs = () => {
 
   return (
     <div style={{ height: 'calc(100vh - 80px)' }}>
-      <Affix offsetTop={80}>
-        <Button
-          type="primary"
-          shape="circle"
-          class="ml-2x"
-          icon={<PlusOutlined />}
-          onClick={handleAddAffixBtnClick}
-        ></Button>
-      </Affix>
+      {isUserLoggedIn && (
+        <Affix offsetTop={80}>
+          <Button
+            type="primary"
+            shape="circle"
+            class="ml-2x"
+            icon={<PlusOutlined />}
+            onClick={handleAddAffixBtnClick}
+          ></Button>
+        </Affix>
+      )}
       <BlogModal
         isEditMode={isEditMode}
         isModalOpen={isModalOpen}
