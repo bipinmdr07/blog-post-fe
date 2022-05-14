@@ -48,7 +48,7 @@ const TopNav = () => {
       <Button key="2" type="primary" icon={<PlusOutlined />}>
         Create Blog
       </Button>,
-      <Avatar key="3" icon={<UserOutlined />}></Avatar>,
+      <Avatar key="3" icon={<UserOutlined />} src={user.avatarUrl}></Avatar>,
       <Button key="4" icon={<LogoutOutlined />} onClick={handleLogoutClick}>
         Logout
       </Button>,
