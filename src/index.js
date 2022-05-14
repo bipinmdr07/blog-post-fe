@@ -10,7 +10,8 @@ import App from 'components/App';
 
 import config from './config';
 
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
+import './index.css';
 
 const renderComponent = rootElement => {
   rootElement.render(
