@@ -30,7 +30,6 @@ const Blogs = () => {
           <Button
             type="primary"
             shape="circle"
-            class="ml-2x"
             icon={<PlusOutlined />}
             onClick={handleAddAffixBtnClick}
           ></Button>

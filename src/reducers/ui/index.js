@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import blogs from './blogs';
+
+export default combineReducers({
+  blogs,
+});
