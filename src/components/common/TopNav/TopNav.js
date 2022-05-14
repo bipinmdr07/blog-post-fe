@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { PageHeader, Button, Avatar } from 'antd';
 import {
+  PlusOutlined,
   UserOutlined,
   GithubOutlined,
   LogoutOutlined,
@@ -9,7 +10,6 @@ import {
 
 import config from 'config';
 
-import './TopNav.css';
 import { isEmpty } from 'utils/isEmpty';
 
 const TopNav = props => {
@@ -35,16 +35,26 @@ const TopNav = props => {
     </Button>,
   ];
 
-  if (isEmpty(user)) {
+  if (!isEmpty(user)) {
     extras = [
-      <Avatar key="2" icon={<UserOutlined />}></Avatar>,
-      <Button key="3" icon={<LogoutOutlined />}>
+      <Button key="2" type="primary" icon={<PlusOutlined />}>
+        Create Blog
+      </Button>,
+      <Avatar key="3" icon={<UserOutlined />}></Avatar>,
+      <Button key="4" icon={<LogoutOutlined />}>
         Logout
       </Button>,
     ];
   }
 
-  return <PageHeader title="Blog Post" className="header" extra={extras} />;
+  return (
+    <PageHeader
+      title="Blog Post"
+      className="header"
+      ghost={false}
+      extra={extras}
+    />
+  );
 };
 
 TopNav.defaultProps = {
