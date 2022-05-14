@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { PageHeader, Button, Avatar } from 'antd';
 import {
-  PlusOutlined,
   UserOutlined,
   GithubOutlined,
   LogoutOutlined,
@@ -45,11 +44,8 @@ const TopNav = () => {
 
   if (!isEmpty(user)) {
     extras = [
-      <Button key="2" type="primary" icon={<PlusOutlined />}>
-        Create Blog
-      </Button>,
-      <Avatar key="3" icon={<UserOutlined />} src={user.avatarUrl}></Avatar>,
-      <Button key="4" icon={<LogoutOutlined />} onClick={handleLogoutClick}>
+      <Avatar key="2" icon={<UserOutlined />} src={user.avatarUrl}></Avatar>,
+      <Button key="3" icon={<LogoutOutlined />} onClick={handleLogoutClick}>
         Logout
       </Button>,
     ];
