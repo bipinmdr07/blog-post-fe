@@ -1,8 +1,4 @@
-import {
-  LOGIN_PENDING,
-  LOGIN_REJECTED,
-  LOGIN_FULFILLED,
-} from 'actions/data/auth';
+import { LOGOUT, SET_LOGGED_IN_USER } from 'actions/data/auth';
 
 const INITIAL_STATE = {
   isLoggedIn: false,
@@ -11,21 +7,18 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOGIN_PENDING:
-      return {
-        ...state,
-      };
-
-    case LOGIN_REJECTED:
-      return {
-        ...state,
-      };
-
-    case LOGIN_FULFILLED:
+    case SET_LOGGED_IN_USER:
       return {
         ...state,
         isLoggedIn: true,
-        user: action.payload.data,
+        user: action.payload,
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: {},
       };
 
     default:

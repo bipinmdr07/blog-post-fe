@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import { PageHeader, Button, Avatar } from 'antd';
 import {
   PlusOutlined,
@@ -11,9 +13,11 @@ import {
 import config from 'config';
 
 import { isEmpty } from 'utils/isEmpty';
+import { logout } from 'actions/data/auth';
 
-const TopNav = props => {
-  const { user } = props;
+const TopNav = () => {
+  const user = useSelector(state => state.data.auth.user);
+  const dispatch = useDispatch();
 
   const {
     oauth: {
@@ -23,6 +27,10 @@ const TopNav = props => {
 
   const redirectToGithubAuthPage = () => {
     window.location.href = `${oauthURL}?client_id=${clientId}`;
+  };
+
+  const handleLogoutClick = () => {
+    dispatch(logout());
   };
 
   let extras = [
@@ -41,7 +49,7 @@ const TopNav = props => {
         Create Blog
       </Button>,
       <Avatar key="3" icon={<UserOutlined />}></Avatar>,
-      <Button key="4" icon={<LogoutOutlined />}>
+      <Button key="4" icon={<LogoutOutlined />} onClick={handleLogoutClick}>
         Logout
       </Button>,
     ];
