@@ -7,6 +7,7 @@ import { isEmpty } from 'utils/isEmpty';
 import { getUserFromToken } from 'utils/jwt';
 
 import { setLoggedInUser } from 'actions/data/auth';
+import { setToken } from 'services/tokenService';
 
 const Login = () => {
   // eslint-disable-next-line
@@ -21,11 +22,13 @@ const Login = () => {
   const handleUserLogin = async () => {
     if (isEmpty(searchParams.get('access_token')) || !isEmpty(user)) {
       await sleep(1000);
+
       window.location = '/';
       return;
     }
 
     const userInfo = getUserFromToken(searchParams.get('access_token'));
+    setToken(searchParams.get('access_token'));
 
     dispatch(setLoggedInUser(userInfo));
   };
