@@ -9,7 +9,7 @@ const BlogForm = props => {
   return (
     <Space direction="vertical">
       <div>
-        <Input name="name" onChange={handleChange} placeholder="Name"></Input>
+        <Input name="title" onChange={handleChange} placeholder="Title"></Input>
       </div>
       <div>
         <TextArea
