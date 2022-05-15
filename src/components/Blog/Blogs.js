@@ -1,7 +1,8 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Affix, Button } from 'antd';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
 
@@ -9,9 +10,11 @@ const Blogs = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isUserLoggedIn = useSelector(store => store.data.auth.isLoggedIn);
+  const blogs = useSelector(store => store.data.blogs.blogs);
+  const dispatch = useDispatch();
 
-  const handleSave = values => {
-    console.log(values);
+  const handleSave = async values => {
+    await dispatch(createBlog(values)).unwrap();
   };
 
   const handleCancel = () => {
@@ -25,6 +28,9 @@ const Blogs = () => {
 
   return (
     <div style={{ height: 'calc(100vh - 80px)' }}>
+      {blogs.map((blog, index) => (
+        <p key={`blog-${index}`}>{JSON.stringify(blog, null, 2)}</p>
+      ))}
       {isUserLoggedIn && (
         <Affix offsetTop={80}>
           <Button
