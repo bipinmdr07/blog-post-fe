@@ -13,6 +13,10 @@ import config from './config';
 import 'antd/dist/antd.min.css';
 import './index.css';
 
+import init from 'init';
+
+init();
+
 const renderComponent = rootElement => {
   rootElement.render(
     <PersistGate persistor={persistor}>
