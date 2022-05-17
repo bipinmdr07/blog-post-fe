@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
-import { Affix, Button } from 'antd';
+import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from 'services/blogServices';
 
@@ -57,20 +57,27 @@ const Blogs = () => {
   };
 
   return (
-    <div style={{ height: 'calc(100vh - 80px)' }}>
-      {blogs.map((blog, index) => (
-        <BlogCard key={`blog-${index}`} blog={blog}></BlogCard>
-      ))}
+    <div style={{ height: 'calc(100vh - 112px)' }}>
       {isUserLoggedIn && (
-        <Affix offsetTop={80}>
+        <div className="mb-4x">
           <Button
             type="primary"
-            shape="circle"
             icon={<PlusOutlined />}
             onClick={handleAddAffixBtnClick}
-          ></Button>
-        </Affix>
+          >
+            Create Blog
+          </Button>
+        </div>
       )}
+      <div className="d-grid">
+        {blogs.map((blog, index) => (
+          <BlogCard
+            key={`blog-${index}`}
+            blog={blog}
+            className="grid-item"
+          ></BlogCard>
+        ))}
+      </div>
       {isCreateBlogModalOpen && (
         <BlogModal
           isModalOpen={isCreateBlogModalOpen}

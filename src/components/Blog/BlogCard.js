@@ -7,7 +7,7 @@ import { setBlog } from 'actions/data/blogs';
 import { setEditBlogModalStatus } from 'actions/ui/blogs';
 
 const BlogCard = props => {
-  const { blog } = props;
+  const { blog, className } = props;
 
   const dispatch = useDispatch();
 
@@ -40,6 +40,7 @@ const BlogCard = props => {
   return (
     <Card
       title={title}
+      className={className}
       extra={
         <MoreMenu menu={menu}>
           <MoreOutlined className="cursor-pointer"></MoreOutlined>
@@ -53,6 +54,7 @@ const BlogCard = props => {
 
 BlogCard.defaultProps = {
   blog: {},
+  className: '',
 };
 
 BlogCard.propTypes = {
@@ -60,6 +62,7 @@ BlogCard.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
   }),
+  className: PropTypes.string,
 };
 
 export default BlogCard;
