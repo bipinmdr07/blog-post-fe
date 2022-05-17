@@ -32,8 +32,6 @@ function buildAuthHeader(accessToken) {
 export function requestInterceptor(request) {
   const accessToken = tokenService.getToken();
 
-  console.log(' requests interceptor: ', accessToken);
-
   if (accessToken && !request.headers.AUTHORIZATION_HEADER) {
     request.headers[AUTHORIZATION_HEADER] = buildAuthHeader(accessToken);
   }

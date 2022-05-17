@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { PlusOutlined } from '@ant-design/icons';
 import { Affix, Button } from 'antd';
 import { useState } from 'react';
@@ -5,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
+import { getBlogs } from 'actions/data/blogs';
 
 const Blogs = () => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -13,8 +16,22 @@ const Blogs = () => {
   const blogs = useSelector(store => store.data.blogs.blogs);
   const dispatch = useDispatch();
 
+  console.log({ getBlogs });
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      dispatch(getBlogs());
+    } catch (err) {
+      console.log('error: ', err);
+    }
+  };
+
   const handleSave = async values => {
-    await dispatch(createBlog(values)).unwrap();
+    dispatch(createBlog(values));
   };
 
   const handleCancel = () => {
@@ -29,7 +46,7 @@ const Blogs = () => {
   return (
     <div style={{ height: 'calc(100vh - 80px)' }}>
       {blogs.map((blog, index) => (
-        <p key={`blog-${index}`}>{JSON.stringify(blog, null, 2)}</p>
+        <p key={`blog-${index}`}>{blog.title}</p>
       ))}
       {isUserLoggedIn && (
         <Affix offsetTop={80}>
