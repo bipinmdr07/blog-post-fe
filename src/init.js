@@ -5,7 +5,8 @@ import * as interceptors from 'common/interceptors';
 function initInterceptors() {
   http.interceptors.request.use(interceptors.requestInterceptor);
   http.interceptors.response.use(
-    (response => response, interceptors.responseInterceptor)
+    response => response,
+    interceptors.responseInterceptor
   );
 }
 
