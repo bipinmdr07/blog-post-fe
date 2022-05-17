@@ -2,6 +2,8 @@ import HttpStatus from 'http-status';
 import history from 'utils/history';
 import * as routes from 'constants/routes';
 
+import { message as toast } from 'antd';
+
 import { logout } from 'actions/data/auth';
 import store from 'store';
 
@@ -66,7 +68,8 @@ export async function responseInterceptor(error) {
   ) {
     store.dispatch(logout());
     history.push(routes.HOME);
-    // TODO: Add toast message here
+
+    toast.error('You have been logged out. Please login again.');
   }
 
   return Promise.reject(error);
