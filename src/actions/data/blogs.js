@@ -15,6 +15,13 @@ export const GET_BLOGS_FULFILLED = 'GET_BLOGS_FULFILLED';
 
 export const getBlogs = createAction(GET_BLOGS, blogServices.getBlogs);
 
+export const UPDATE_BLOG = 'UPDATE_BLOG';
+export const UPDATE_BLOG_PENDING = 'UPDATE_BLOG_PENDING';
+export const UPDATE_BLOG_REJECTED = 'UPDATE_BLOG_REJECTED';
+export const UPDATE_BLOG_FULFILLED = 'UPDATE_BLOG_FULFILLED';
+
+export const updateBlog = createAction(UPDATE_BLOG, blogServices.updateBlog);
+
 export const SET_BLOG = 'SET_BLOG';
 
 export const setBlog = createAction(SET_BLOG);

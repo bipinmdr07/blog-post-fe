@@ -7,7 +7,7 @@ import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
 import BlogCard from './BlogCard';
-import { getBlogs, setBlog } from 'actions/data/blogs';
+import { getBlogs, setBlog, updateBlog } from 'actions/data/blogs';
 import {
   setCreateBlogModalStatus,
   setEditBlogModalStatus,
@@ -22,6 +22,7 @@ const Blogs = () => {
   const isEditBlogModalOpen = useSelector(
     store => store.ui.blogs.isEditBlogModalOpen
   );
+  const blog = useSelector(store => store.data.blogs.blog);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,11 +39,12 @@ const Blogs = () => {
 
   const handleSave = async values => {
     dispatch(createBlog(values));
+    dispatch(setCreateBlogModalStatus(false));
   };
 
-  const handleEdit = async values => {
-    console.log('Edit : ', values);
-    // dispatch()
+  const handleUpdate = async values => {
+    dispatch(updateBlog(blog.blogId, values));
+    dispatch(setEditBlogModalStatus(false));
   };
 
   const handleCancel = () => {
@@ -89,7 +91,7 @@ const Blogs = () => {
         <BlogModal
           isEditMode={true}
           isModalOpen={isEditBlogModalOpen}
-          handleSave={handleEdit}
+          handleSave={handleUpdate}
           handleCancel={handleCancel}
         ></BlogModal>
       )}

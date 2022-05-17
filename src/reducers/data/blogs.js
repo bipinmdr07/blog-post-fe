@@ -6,6 +6,9 @@ import {
   GET_BLOGS_REJECTED,
   GET_BLOGS_FULFILLED,
   SET_BLOG,
+  UPDATE_BLOG_FULFILLED,
+  UPDATE_BLOG_PENDING,
+  UPDATE_BLOG_REJECTED,
 } from 'actions/data/blogs';
 
 const INITIAL_STATE = {
@@ -27,6 +30,17 @@ export default (state = INITIAL_STATE, action) => {
         blogs: [...action.payload.data],
       };
 
+    case UPDATE_BLOG_FULFILLED:
+      return {
+        ...state,
+        blog: { ...action.payload.data },
+        blogs: state.blogs.map(blog =>
+          blog.blogId === action.payload.data.blogId
+            ? { ...action.payload.data }
+            : blog
+        ),
+      };
+
     case SET_BLOG:
       return {
         ...state,
@@ -37,6 +51,8 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_BLOG_REJECTED:
     case GET_BLOGS_PENDING:
     case GET_BLOGS_REJECTED:
+    case UPDATE_BLOG_PENDING:
+    case UPDATE_BLOG_REJECTED:
     default:
       return state;
   }

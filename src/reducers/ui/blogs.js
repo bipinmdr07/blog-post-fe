@@ -5,6 +5,9 @@ import {
   GET_BLOGS_PENDING,
   GET_BLOGS_REJECTED,
   GET_BLOGS_FULFILLED,
+  UPDATE_BLOG_PENDING,
+  UPDATE_BLOG_REJECTED,
+  UPDATE_BLOG_FULFILLED,
 } from 'actions/data/blogs';
 import {
   SET_CREATE_BLOG_MODAL_STATUS,
@@ -14,6 +17,7 @@ import {
 const INITIAL_STATE = {
   isAddingBlog: false,
   isFetchingBlogs: false,
+  isUpdatingBlog: false,
   isCreateBlogModalOpen: false,
   isEditBlogModalOpen: false,
 };
@@ -44,6 +48,19 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetchingBlogs: false,
+      };
+
+    case UPDATE_BLOG_PENDING:
+      return {
+        ...state,
+        isUpdatingBlog: true,
+      };
+
+    case UPDATE_BLOG_REJECTED:
+    case UPDATE_BLOG_FULFILLED:
+      return {
+        ...state,
+        isUpdatingBlog: false,
       };
 
     case SET_CREATE_BLOG_MODAL_STATUS:
