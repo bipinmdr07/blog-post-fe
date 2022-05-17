@@ -27,6 +27,7 @@ const BlogModal = props => {
   return (
     <Modal
       title={`${isEditMode ? 'Edit' : 'Create'} Blog`}
+      okText={isEditMode ? 'Update' : 'Create'}
       visible={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
