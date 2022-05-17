@@ -7,3 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: lightgrey;
 }
+
+.body-wrapper {
+  padding: 20px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

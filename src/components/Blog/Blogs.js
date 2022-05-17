@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
+import BlogCard from './BlogCard';
 import { getBlogs } from 'actions/data/blogs';
 
 const Blogs = () => {
@@ -46,7 +47,7 @@ const Blogs = () => {
   return (
     <div style={{ height: 'calc(100vh - 80px)' }}>
       {blogs.map((blog, index) => (
-        <p key={`blog-${index}`}>{blog.title}</p>
+        <BlogCard key={`blog-${index}`} blog={blog}></BlogCard>
       ))}
       {isUserLoggedIn && (
         <Affix offsetTop={80}>
