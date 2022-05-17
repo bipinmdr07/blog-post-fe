@@ -22,6 +22,13 @@ export const UPDATE_BLOG_FULFILLED = 'UPDATE_BLOG_FULFILLED';
 
 export const updateBlog = createAction(UPDATE_BLOG, blogServices.updateBlog);
 
+export const DELETE_BLOG = 'DELETE_BLOG';
+export const DELETE_BLOG_PENDING = 'DELETE_BLOG_PENDING';
+export const DELETE_BLOG_REJECTED = 'DELETE_BLOG_REJECTED';
+export const DELETE_BLOG_FULFILLED = 'DELETE_BLOG_FULFILLED';
+
+export const deleteBlog = createAction(DELETE_BLOG, blogServices.deleteBlog);
+
 export const SET_BLOG = 'SET_BLOG';
 
 export const setBlog = createAction(SET_BLOG);

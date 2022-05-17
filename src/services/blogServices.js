@@ -13,3 +13,7 @@ export async function getBlogs() {
 export async function updateBlog(id, payload) {
   return await http.put(interpolate(endpoints.BLOG, { id }), payload);
 }
+
+export async function deleteBlog(id) {
+  return await http.delete(interpolate(endpoints.BLOG, { id }));
+}

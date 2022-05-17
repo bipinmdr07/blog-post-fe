@@ -1,9 +1,9 @@
-import { Card, Menu } from 'antd';
+import { Card, Menu, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import MoreMenu from 'components/common/MoreMenu/MoreMenu';
 import { useDispatch } from 'react-redux';
-import { setBlog } from 'actions/data/blogs';
+import { deleteBlog, setBlog } from 'actions/data/blogs';
 import { setEditBlogModalStatus } from 'actions/ui/blogs';
 
 const BlogCard = props => {
@@ -18,7 +18,10 @@ const BlogCard = props => {
     dispatch(setEditBlogModalStatus(true));
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    dispatch(setBlog({}));
+    dispatch(deleteBlog(blog.blogId));
+  };
 
   const menu = (
     <Menu
@@ -29,9 +32,17 @@ const BlogCard = props => {
           onClick: handleEdit,
         },
         {
-          label: 'Delete',
+          label: (
+            <Popconfirm
+              title="Are you sure to delete this Blog?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={handleDelete}
+            >
+              Delete
+            </Popconfirm>
+          ),
           icon: <DeleteOutlined />,
-          onClick: handleDelete,
         },
       ]}
     ></Menu>
@@ -59,6 +70,7 @@ BlogCard.defaultProps = {
 
 BlogCard.propTypes = {
   blog: PropTypes.shape({
+    blogId: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
   }),
