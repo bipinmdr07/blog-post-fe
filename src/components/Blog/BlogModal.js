@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import { Modal } from 'antd';
 
 import BlogForm from './BlogForm';
+import { useSelector } from 'react-redux';
 
 const BlogModal = props => {
-  const [blogInfo, setBlogInfo] = useState({});
   const { isEditMode, isModalOpen, handleSave, handleCancel } = props;
+
+  const blog = useSelector(state => state.data.blogs.blog);
+  const [blogInfo, setBlogInfo] = useState(blog);
 
   const handleChange = event => {
     setBlogInfo({
@@ -28,7 +31,7 @@ const BlogModal = props => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <BlogForm handleChange={handleChange}></BlogForm>
+      <BlogForm blog={blogInfo} handleChange={handleChange}></BlogForm>
     </Modal>
   );
 };

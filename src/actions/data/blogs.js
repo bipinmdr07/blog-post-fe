@@ -14,3 +14,7 @@ export const GET_BLOGS_REJECTED = 'GET_BLOGS_REJECTED';
 export const GET_BLOGS_FULFILLED = 'GET_BLOGS_FULFILLED';
 
 export const getBlogs = createAction(GET_BLOGS, blogServices.getBlogs);
+
+export const SET_BLOG = 'SET_BLOG';
+
+export const setBlog = createAction(SET_BLOG);

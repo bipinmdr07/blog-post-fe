@@ -2,22 +2,27 @@ import { useEffect } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { Affix, Button } from 'antd';
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
 import BlogCard from './BlogCard';
-import { getBlogs } from 'actions/data/blogs';
+import { getBlogs, setBlog } from 'actions/data/blogs';
+import {
+  setCreateBlogModalStatus,
+  setEditBlogModalStatus,
+} from 'actions/ui/blogs';
 
 const Blogs = () => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const isUserLoggedIn = useSelector(store => store.data.auth.isLoggedIn);
   const blogs = useSelector(store => store.data.blogs.blogs);
+  const isCreateBlogModalOpen = useSelector(
+    store => store.ui.blogs.isCreateBlogModalOpen
+  );
+  const isEditBlogModalOpen = useSelector(
+    store => store.ui.blogs.isEditBlogModalOpen
+  );
   const dispatch = useDispatch();
-
-  console.log({ getBlogs });
 
   useEffect(() => {
     fetchBlogs();
@@ -35,13 +40,20 @@ const Blogs = () => {
     dispatch(createBlog(values));
   };
 
+  const handleEdit = async values => {
+    console.log('Edit : ', values);
+    // dispatch()
+  };
+
   const handleCancel = () => {
-    setIsModalOpen(false);
+    dispatch(setBlog({}));
+    dispatch(setCreateBlogModalStatus(false));
+    dispatch(setEditBlogModalStatus(false));
   };
 
   const handleAddAffixBtnClick = () => {
-    setIsEditMode(false);
-    setIsModalOpen(true);
+    dispatch(setBlog({}));
+    dispatch(setCreateBlogModalStatus(true));
   };
 
   return (
@@ -59,12 +71,21 @@ const Blogs = () => {
           ></Button>
         </Affix>
       )}
-      <BlogModal
-        isEditMode={isEditMode}
-        isModalOpen={isModalOpen}
-        handleSave={handleSave}
-        handleCancel={handleCancel}
-      ></BlogModal>
+      {isCreateBlogModalOpen && (
+        <BlogModal
+          isModalOpen={isCreateBlogModalOpen}
+          handleSave={handleSave}
+          handleCancel={handleCancel}
+        ></BlogModal>
+      )}
+      {isEditBlogModalOpen && (
+        <BlogModal
+          isEditMode={true}
+          isModalOpen={isEditBlogModalOpen}
+          handleSave={handleEdit}
+          handleCancel={handleCancel}
+        ></BlogModal>
+      )}
     </div>
   );
 };

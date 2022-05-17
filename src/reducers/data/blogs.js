@@ -5,6 +5,7 @@ import {
   GET_BLOGS_PENDING,
   GET_BLOGS_REJECTED,
   GET_BLOGS_FULFILLED,
+  SET_BLOG,
 } from 'actions/data/blogs';
 
 const INITIAL_STATE = {
@@ -24,6 +25,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         blogs: [...action.payload.data],
+      };
+
+    case SET_BLOG:
+      return {
+        ...state,
+        blog: action.payload,
       };
 
     case ADD_BLOG_PENDING:

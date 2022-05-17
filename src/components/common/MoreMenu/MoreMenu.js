@@ -1,4 +1,3 @@
-/* eslint-disable */
 import PropTypes from 'prop-types';
 import { Dropdown } from 'antd';
 
@@ -13,9 +12,9 @@ MoreMenu.defaultProps = {
   children: null,
 };
 
-MoreMenu.PropTypes = {
-  menu: PropTypes.component || null,
-  children: PropTypes.component || null,
+MoreMenu.propTypes = {
+  menu: PropTypes.node || null,
+  children: PropTypes.node || null,
 };
 
 export default MoreMenu;
