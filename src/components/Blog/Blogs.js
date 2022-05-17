@@ -3,11 +3,10 @@ import { useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { createBlog } from 'services/blogServices';
 
 import BlogModal from './BlogModal';
 import BlogCard from './BlogCard';
-import { getBlogs, setBlog, updateBlog } from 'actions/data/blogs';
+import { addBlog, getBlogs, setBlog, updateBlog } from 'actions/data/blogs';
 import {
   setCreateBlogModalStatus,
   setEditBlogModalStatus,
@@ -38,7 +37,7 @@ const Blogs = () => {
   };
 
   const handleSave = async values => {
-    dispatch(createBlog(values));
+    dispatch(addBlog(values));
     dispatch(setCreateBlogModalStatus(false));
   };
 
