@@ -11,9 +11,11 @@ import {
   setCreateBlogModalStatus,
   setEditBlogModalStatus,
 } from 'actions/ui/blogs';
+import { hasPermission } from 'utils/permission';
+
+import * as permissions from 'constants/permissions';
 
 const Blogs = () => {
-  const isUserLoggedIn = useSelector(store => store.data.auth.isLoggedIn);
   const blogs = useSelector(store => store.data.blogs.blogs);
   const isCreateBlogModalOpen = useSelector(
     store => store.ui.blogs.isCreateBlogModalOpen
@@ -21,6 +23,7 @@ const Blogs = () => {
   const isEditBlogModalOpen = useSelector(
     store => store.ui.blogs.isEditBlogModalOpen
   );
+  const user = useSelector(store => store.data.auth.user);
   const blog = useSelector(store => store.data.blogs.blog);
   const dispatch = useDispatch();
 
@@ -59,7 +62,7 @@ const Blogs = () => {
 
   return (
     <div style={{ height: 'calc(100vh - 112px)' }}>
-      {isUserLoggedIn && (
+      {hasPermission(user, permissions.ADD_BLOG) && (
         <div className="mb-4x">
           <Button
             type="primary"
