@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
 import BlogModal from './BlogModal';
@@ -33,20 +33,33 @@ const Blogs = () => {
 
   const fetchBlogs = async () => {
     try {
-      dispatch(getBlogs());
+      await dispatch(getBlogs());
+      message.success('All blogs fetched successfully');
     } catch (err) {
       console.log('error: ', err);
     }
   };
 
   const handleSave = async values => {
-    dispatch(addBlog(values));
-    dispatch(setCreateBlogModalStatus(false));
+    try {
+      await dispatch(addBlog(values));
+
+      message.success('Blog created successfully.');
+      dispatch(setCreateBlogModalStatus(false));
+    } catch (err) {
+      message.error('Failed to create Blog');
+    }
   };
 
   const handleUpdate = async values => {
-    dispatch(updateBlog(blog.blogId, values));
-    dispatch(setEditBlogModalStatus(false));
+    try {
+      await dispatch(updateBlog(blog.blogId, values));
+
+      message.success('Blog updated successfully');
+      dispatch(setEditBlogModalStatus(false));
+    } catch (err) {
+      message.error('Failed to update the Blog.');
+    }
   };
 
   const handleCancel = () => {
