@@ -12,6 +12,8 @@ import promise from 'redux-promise-middleware';
 import rootReducer from './reducers';
 import { configureStore } from '@reduxjs/toolkit';
 
+import thunk from 'redux-thunk';
+
 const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware => [
@@ -20,6 +22,7 @@ const store = configureStore({
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    thunk,
     promise,
   ],
 });
